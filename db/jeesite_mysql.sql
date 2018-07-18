@@ -2327,6 +2327,21 @@ CREATE TABLE `test_tree` (
   KEY `test_data_parent_id` (`parent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='树结构表';
 
+DROP TABLE IF EXISTS `test_sample`;
+CREATE TABLE `test_sample` (
+  `id` varchar(64) NOT NULL COMMENT '编号',
+  `name` varchar(64) DEFAULT NULL COMMENT '用户名',
+  `password` varchar(64) DEFAULT NULL COMMENT '密码',
+  `create_by` varchar(64) NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) NOT NULL COMMENT '更新者',
+  `update_date` datetime NOT NULL COMMENT '更新时间',
+  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`),
+  KEY `test_data_del_flag` (`del_flag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='业务数据表';
+
 -- ----------------------------
 -- Records of test_tree
 -- ----------------------------
