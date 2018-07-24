@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.service.dao.version.SingleServiceVersionDao">
+    
+	<sql id="singleServiceVersionColumns">
+		a.id AS "id",
+		a.service_code AS "serviceCode",
+		a.channel AS "channel",
+		a.version AS "version",
+		a.ver_status AS "verStatus",
+		a.data_des AS "dataDes",
+		a.data_example AS "dataExample",
+		a.data_returndes AS "dataReturndes",
+		a.is_current AS "isCurrent",
+		a.ret_data_type AS "retDataType",
+		a.class_name AS "className",
+		a.imitate_data AS "imitateData",
+		a.query_groupid AS "queryGroupid",
+		a.pro_code AS "proCode",
+		a.app_code AS "appCode",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="singleServiceVersionJoins">
+	</sql>
+    
+	<select id="get" resultType="SingleServiceVersion">
+		SELECT 
+			<include refid="singleServiceVersionColumns"/>
+		FROM ax_service_version a
+		<include refid="singleServiceVersionJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="SingleServiceVersion">
+		SELECT 
+			<include refid="singleServiceVersionColumns"/>
+		FROM ax_service_version a
+		<include refid="singleServiceVersionJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="serviceCode != null and serviceCode != ''">
+				AND a.service_code = #{serviceCode}
+			</if>
+			<if test="channel != null and channel != ''">
+				AND a.channel = #{channel}
+			</if>
+			<if test="version != null and version != ''">
+				AND a.version = #{version}
+			</if>
+			<if test="verStatus != null and verStatus != ''">
+				AND a.ver_status = #{verStatus}
+			</if>
+			<if test="className != null and className != ''">
+				AND a.class_name = #{className}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="SingleServiceVersion">
+		SELECT 
+			<include refid="singleServiceVersionColumns"/>
+		FROM ax_service_version a
+		<include refid="singleServiceVersionJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ax_service_version(
+			id,
+			service_code,
+			channel,
+			version,
+			ver_status,
+			data_des,
+			data_example,
+			data_returndes,
+			is_current,
+			ret_data_type,
+			class_name,
+			imitate_data,
+			query_groupid,
+			pro_code,
+			app_code,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{serviceCode},
+			#{channel},
+			#{version},
+			#{verStatus},
+			#{dataDes},
+			#{dataExample},
+			#{dataReturndes},
+			#{isCurrent},
+			#{retDataType},
+			#{className},
+			#{imitateData},
+			#{queryGroupid},
+			#{proCode},
+			#{appCode},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ax_service_version SET 	
+			service_code = #{serviceCode},
+			channel = #{channel},
+			version = #{version},
+			ver_status = #{verStatus},
+			data_des = #{dataDes},
+			data_example = #{dataExample},
+			data_returndes = #{dataReturndes},
+			is_current = #{isCurrent},
+			ret_data_type = #{retDataType},
+			class_name = #{className},
+			imitate_data = #{imitateData},
+			query_groupid = #{queryGroupid},
+			pro_code = #{proCode},
+			app_code = #{appCode},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE ax_service_version SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
