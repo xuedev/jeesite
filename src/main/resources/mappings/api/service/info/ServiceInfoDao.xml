@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.service.dao.info.ServiceInfoDao">
+    
+	<sql id="serviceInfoColumns">
+		a.id AS "id",
+		a.service_code AS "serviceCode",
+		a.service_name AS "serviceName",
+		a.is_need_login AS "isNeedLogin",
+		a.is_allow_cross_domain AS "isAllowCrossDomain",
+		a.service_type AS "serviceType",
+		a.adap_mode AS "adapMode",
+		a.comm_mode AS "commMode",
+		a.inter_status AS "interStatus",
+		a.pro_code AS "proCode",
+		a.app_code AS "appCode",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="serviceInfoJoins">
+	</sql>
+    
+	<select id="get" resultType="ServiceInfo">
+		SELECT 
+			<include refid="serviceInfoColumns"/>
+		FROM ax_service_info a
+		<include refid="serviceInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ServiceInfo">
+		SELECT 
+			<include refid="serviceInfoColumns"/>
+		FROM ax_service_info a
+		<include refid="serviceInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="serviceCode != null and serviceCode != ''">
+				AND a.service_code = #{serviceCode}
+			</if>
+			<if test="serviceName != null and serviceName != ''">
+				AND a.service_name = #{serviceName}
+			</if>
+			<if test="serviceType != null and serviceType != ''">
+				AND a.service_type = #{serviceType}
+			</if>
+			<if test="adapMode != null and adapMode != ''">
+				AND a.adap_mode = #{adapMode}
+			</if>
+			<if test="commMode != null and commMode != ''">
+				AND a.comm_mode = #{commMode}
+			</if>
+			<if test="interStatus != null and interStatus != ''">
+				AND a.inter_status = #{interStatus}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ServiceInfo">
+		SELECT 
+			<include refid="serviceInfoColumns"/>
+		FROM ax_service_info a
+		<include refid="serviceInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ax_service_info(
+			id,
+			service_code,
+			service_name,
+			is_need_login,
+			is_allow_cross_domain,
+			service_type,
+			adap_mode,
+			comm_mode,
+			inter_status,
+			pro_code,
+			app_code,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{serviceCode},
+			#{serviceName},
+			#{isNeedLogin},
+			#{isAllowCrossDomain},
+			#{serviceType},
+			#{adapMode},
+			#{commMode},
+			#{interStatus},
+			#{proCode},
+			#{appCode},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ax_service_info SET 	
+			service_code = #{serviceCode},
+			service_name = #{serviceName},
+			is_need_login = #{isNeedLogin},
+			is_allow_cross_domain = #{isAllowCrossDomain},
+			service_type = #{serviceType},
+			adap_mode = #{adapMode},
+			comm_mode = #{commMode},
+			inter_status = #{interStatus},
+			pro_code = #{proCode},
+			app_code = #{appCode},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE ax_service_info SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

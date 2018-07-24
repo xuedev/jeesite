@@ -43,6 +43,8 @@
 	<typeAliases>
 		<typeAlias alias="Page" type="com.thinkgem.jeesite.common.persistence.Page" /><!--分页  -->
 		<package name="com.management.modules"/>
+		<package name="com.service"/>
+		<package name="com.api"/>
 	</typeAliases>
 	
 	<!-- 插件配置 -->
