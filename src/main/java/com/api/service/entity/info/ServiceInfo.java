@@ -4,6 +4,8 @@
 package com.api.service.entity.info;
 
 import org.hibernate.validator.constraints.Length;
+import java.util.List;
+import com.google.common.collect.Lists;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
 
@@ -25,6 +27,7 @@ public class ServiceInfo extends DataEntity<ServiceInfo> {
 	private String interStatus;		// 接口状态
 	private String proCode;		// 项目编码
 	private String appCode;		// 应用编码
+	private List<ServiceVersion> serviceVersionList = Lists.newArrayList();		// 子表列表
 	
 	public ServiceInfo() {
 		super();
@@ -124,4 +127,11 @@ public class ServiceInfo extends DataEntity<ServiceInfo> {
 		this.appCode = appCode;
 	}
 	
+	public List<ServiceVersion> getServiceVersionList() {
+		return serviceVersionList;
+	}
+
+	public void setServiceVersionList(List<ServiceVersion> serviceVersionList) {
+		this.serviceVersionList = serviceVersionList;
+	}
 }

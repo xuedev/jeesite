@@ -5,13 +5,17 @@ package com.api.service.service.info;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
+import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.api.service.entity.info.ServiceInfo;
 import com.api.service.dao.info.ServiceInfoDao;
+import com.api.service.entity.info.ServiceVersion;
+import com.api.service.dao.info.ServiceVersionDao;
 
 /**
  * 服务基本信息Service
@@ -22,8 +26,15 @@ import com.api.service.dao.info.ServiceInfoDao;
 @Transactional(readOnly = true)
 public class ServiceInfoService extends CrudService<ServiceInfoDao, ServiceInfo> {
 
+	@Autowired
+	private ServiceVersionDao serviceVersionDao;
+	
 	public ServiceInfo get(String id) {
-		return super.get(id);
+		ServiceInfo serviceInfo = super.get(id);
+		ServiceVersion s = new ServiceVersion();
+		s.setServiceCode(serviceInfo.getServiceCode());
+		serviceInfo.setServiceVersionList(serviceVersionDao.findList(s));
+		return serviceInfo;
 	}
 	
 	public List<ServiceInfo> findList(ServiceInfo serviceInfo) {
@@ -37,11 +48,31 @@ public class ServiceInfoService extends CrudService<ServiceInfoDao, ServiceInfo>
 	@Transactional(readOnly = false)
 	public void save(ServiceInfo serviceInfo) {
 		super.save(serviceInfo);
+		for (ServiceVersion serviceVersion : serviceInfo.getServiceVersionList()){
+			if (serviceVersion.getId() == null){
+				continue;
+			}
+			if (ServiceVersion.DEL_FLAG_NORMAL.equals(serviceVersion.getDelFlag())){
+				if (StringUtils.isBlank(serviceVersion.getId())){
+					serviceVersion.setServiceCode(serviceInfo.getServiceCode());
+					serviceVersion.preInsert();
+					serviceVersionDao.insert(serviceVersion);
+				}else{
+					serviceVersion.preUpdate();
+					serviceVersionDao.update(serviceVersion);
+				}
+			}else{
+				serviceVersionDao.delete(serviceVersion);
+			}
+		}
 	}
 	
 	@Transactional(readOnly = false)
 	public void delete(ServiceInfo serviceInfo) {
 		super.delete(serviceInfo);
+		ServiceVersion s = new ServiceVersion();
+		s.setServiceCode(serviceInfo.getServiceCode());
+		serviceVersionDao.delete(s);
 	}
 	
 }
