@@ -78,6 +78,18 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">服务中心：</label>
+			<div class="controls">
+				<form:input path="serviceCenterUrl" htmlEscape="false" maxlength="256" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">服务组：</label>
+			<div class="controls">
+				<form:input path="serviceGroup" htmlEscape="false" maxlength="256" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">登录认证方式：</label>
 			<div class="controls">
 				<form:select path="isNeedLogin" class="input-xlarge ">
@@ -87,7 +99,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">是否允许跨域：</label>
+			<label class="control-label">允许跨域：</label>
 			<div class="controls">
 				<form:select path="isAllowCrossDomain" class="input-xlarge ">
 					<form:option value="" label=""/>
@@ -159,10 +171,10 @@
 								<th>服务渠道</th>
 								<th>版本号</th>
 								<th>接口状态</th>
-								<th>接口说明</th>
+								<th>接口明细</th>
 								<th>接口示例</th>
-								<th>返回结果报文</th>
-								<th>是否当前版本</th>
+								<th>返回结果</th>
+								<th>当前版本</th>
 								<th>返回数据类型</th>
 								<th>类名</th>
 								<th>模拟报文</th>
@@ -186,7 +198,12 @@
 								<input id="serviceVersionList{{idx}}_delFlag" name="serviceVersionList[{{idx}}].delFlag" type="hidden" value="0"/>
 							</td>
 							<td>
-								<input id="serviceVersionList{{idx}}_channel" name="serviceVersionList[{{idx}}].channel" type="text" value="{{row.channel}}" maxlength="2" class="input-small required"/>
+								<select id="serviceVersionList{{idx}}_channel" name="serviceVersionList[{{idx}}].channel" data-value="{{row.channel}}" class="input-small required">
+									<option value=""></option>
+									<c:forEach items="${fns:getDictList('service_channel')}" var="dict">
+										<option value="${dict.value}">${dict.label}</option>
+									</c:forEach>
+								</select>
 							</td>
 							<td>
 								<input id="serviceVersionList{{idx}}_version" name="serviceVersionList[{{idx}}].version" type="text" value="{{row.version}}" maxlength="8" class="input-small required"/>
@@ -209,7 +226,12 @@
 								<textarea id="serviceVersionList{{idx}}_dataReturndes" name="serviceVersionList[{{idx}}].dataReturndes" rows="4" class="input-small ">{{row.dataReturndes}}</textarea>
 							</td>
 							<td>
-								<input id="serviceVersionList{{idx}}_isCurrent" name="serviceVersionList[{{idx}}].isCurrent" type="text" value="{{row.isCurrent}}" maxlength="2" class="input-small "/>
+								<select id="serviceVersionList{{idx}}_isCurrent" name="serviceVersionList[{{idx}}].isCurrent" data-value="{{row.isCurrent}}" class="input-small ">
+									<option value=""></option>
+									<c:forEach items="${fns:getDictList('service_current')}" var="dict">
+										<option value="${dict.value}">${dict.label}</option>
+									</c:forEach>
+								</select>
 							</td>
 							<td>
 								<input id="serviceVersionList{{idx}}_retDataType" name="serviceVersionList[{{idx}}].retDataType" type="text" value="{{row.retDataType}}" maxlength="2" class="input-small "/>

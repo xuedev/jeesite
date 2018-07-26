@@ -6,6 +6,8 @@
 		a.id AS "id",
 		a.service_code AS "serviceCode",
 		a.service_name AS "serviceName",
+		a.service_center_url AS "serviceCenterUrl",
+		a.service_group AS "serviceGroup",
 		a.is_need_login AS "isNeedLogin",
 		a.is_allow_cross_domain AS "isAllowCrossDomain",
 		a.service_type AS "serviceType",
@@ -46,6 +48,12 @@
 			<if test="serviceName != null and serviceName != ''">
 				AND a.service_name = #{serviceName}
 			</if>
+			<if test="serviceCenterUrl != null and serviceCenterUrl != ''">
+				AND a.service_center_url = #{serviceCenterUrl}
+			</if>
+			<if test="serviceGroup != null and serviceGroup != ''">
+				AND a.service_group = #{serviceGroup}
+			</if>
 			<if test="serviceType != null and serviceType != ''">
 				AND a.service_type = #{serviceType}
 			</if>
@@ -57,6 +65,12 @@
 			</if>
 			<if test="interStatus != null and interStatus != ''">
 				AND a.inter_status = #{interStatus}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.create_date = #{createDate}
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND a.update_date = #{updateDate}
 			</if>
 		</where>
 		<choose>
@@ -92,6 +106,8 @@
 			id,
 			service_code,
 			service_name,
+			service_center_url,
+			service_group,
 			is_need_login,
 			is_allow_cross_domain,
 			service_type,
@@ -110,6 +126,8 @@
 			#{id},
 			#{serviceCode},
 			#{serviceName},
+			#{serviceCenterUrl},
+			#{serviceGroup},
 			#{isNeedLogin},
 			#{isAllowCrossDomain},
 			#{serviceType},
@@ -131,6 +149,8 @@
 		UPDATE ax_service_info SET 	
 			service_code = #{serviceCode},
 			service_name = #{serviceName},
+			service_center_url = #{serviceCenterUrl},
+			service_group = #{serviceGroup},
 			is_need_login = #{isNeedLogin},
 			is_allow_cross_domain = #{isAllowCrossDomain},
 			service_type = #{serviceType},

@@ -51,6 +51,9 @@
 			<if test="channel != null and channel != ''">
 				AND a.channel = #{channel}
 			</if>
+			<if test="version != null and version != ''">
+				AND a.version = #{version}
+			</if>
 			<if test="verStatus != null and verStatus != ''">
 				AND a.ver_status = #{verStatus}
 			</if>

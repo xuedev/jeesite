@@ -25,7 +25,7 @@ import com.api.service.service.info.ServiceInfoService;
 /**
  * 服务基本信息Controller
  * @author 薛刚希
- * @version 2018-07-24
+ * @version 2018-07-26
  */
 @Controller
 @RequestMapping(value = "${adminPath}/service/info/serviceInfo")

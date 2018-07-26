@@ -10,7 +10,7 @@ import com.api.service.entity.info.ServiceInfo;
 /**
  * 服务基本信息DAO接口
  * @author 薛刚希
- * @version 2018-07-24
+ * @version 2018-07-26
  */
 @MyBatisDao
 public interface ServiceInfoDao extends CrudDao<ServiceInfo> {

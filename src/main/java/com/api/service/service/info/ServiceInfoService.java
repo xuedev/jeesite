@@ -20,7 +20,7 @@ import com.api.service.dao.info.ServiceVersionDao;
 /**
  * 服务基本信息Service
  * @author 薛刚希
- * @version 2018-07-24
+ * @version 2018-07-26
  */
 @Service
 @Transactional(readOnly = true)
@@ -31,9 +31,7 @@ public class ServiceInfoService extends CrudService<ServiceInfoDao, ServiceInfo>
 	
 	public ServiceInfo get(String id) {
 		ServiceInfo serviceInfo = super.get(id);
-		ServiceVersion s = new ServiceVersion();
-		s.setServiceCode(serviceInfo.getServiceCode());
-		serviceInfo.setServiceVersionList(serviceVersionDao.findList(s));
+		serviceInfo.setServiceVersionList(serviceVersionDao.findList(new ServiceVersion(serviceInfo.getServiceCode())));
 		return serviceInfo;
 	}
 	
@@ -70,9 +68,7 @@ public class ServiceInfoService extends CrudService<ServiceInfoDao, ServiceInfo>
 	@Transactional(readOnly = false)
 	public void delete(ServiceInfo serviceInfo) {
 		super.delete(serviceInfo);
-		ServiceVersion s = new ServiceVersion();
-		s.setServiceCode(serviceInfo.getServiceCode());
-		serviceVersionDao.delete(s);
+		serviceVersionDao.delete(new ServiceVersion(serviceInfo.getServiceCode()));
 	}
 	
 }

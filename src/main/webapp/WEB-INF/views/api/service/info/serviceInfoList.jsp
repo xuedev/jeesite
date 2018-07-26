@@ -31,6 +31,12 @@
 			<li><label>服务名称：</label>
 				<form:input path="serviceName" htmlEscape="false" maxlength="256" class="input-medium"/>
 			</li>
+			<li><label>服务中心：</label>
+				<form:input path="serviceCenterUrl" htmlEscape="false" maxlength="256" class="input-medium"/>
+			</li>
+			<li><label>服务组：</label>
+				<form:input path="serviceGroup" htmlEscape="false" maxlength="256" class="input-medium"/>
+			</li>
 			<li><label>服务类型：</label>
 				<form:select path="serviceType" class="input-medium">
 					<form:option value="" label=""/>
@@ -55,6 +61,16 @@
 					<form:options items="${fns:getDictList('service_status')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</li>
+			<li><label>创建时间：</label>
+				<input name="createDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
+					value="<fmt:formatDate value="${serviceInfo.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+			</li>
+			<li><label>更新时间：</label>
+				<input name="updateDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
+					value="<fmt:formatDate value="${serviceInfo.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -65,13 +81,12 @@
 			<tr>
 				<th>服务代码</th>
 				<th>服务名称</th>
-				<th>登录认证方式</th>
-				<th>是否允许跨域</th>
+				<th>服务中心</th>
+				<th>服务组</th>
 				<th>服务类型</th>
 				<th>适配模式</th>
 				<th>请求方式</th>
 				<th>接口状态</th>
-				<th>创建者</th>
 				<th>创建时间</th>
 				<th>更新时间</th>
 				<th>备注信息</th>
@@ -88,10 +103,10 @@
 					${serviceInfo.serviceName}
 				</td>
 				<td>
-					${fns:getDictLabel(serviceInfo.isNeedLogin, 'login_auth_type', '')}
+					${serviceInfo.serviceCenterUrl}
 				</td>
 				<td>
-					${fns:getDictLabel(serviceInfo.isAllowCrossDomain, 'is_allow_cross_domain', '')}
+					${serviceInfo.serviceGroup}
 				</td>
 				<td>
 					${fns:getDictLabel(serviceInfo.serviceType, 'service_type', '')}
@@ -104,9 +119,6 @@
 				</td>
 				<td>
 					${fns:getDictLabel(serviceInfo.interStatus, 'service_status', '')}
-				</td>
-				<td>
-					${serviceInfo.createBy.id}
 				</td>
 				<td>
 					<fmt:formatDate value="${serviceInfo.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>

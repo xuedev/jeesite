@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 服务基本信息Entity
  * @author 薛刚希
- * @version 2018-07-24
+ * @version 2018-07-26
  */
 public class ServiceVersion extends DataEntity<ServiceVersion> {
 	
@@ -19,10 +19,10 @@ public class ServiceVersion extends DataEntity<ServiceVersion> {
 	private String channel;		// 服务渠道
 	private String version;		// 版本号
 	private String verStatus;		// 接口状态
-	private String dataDes;		// 接口说明
+	private String dataDes;		// 接口明细
 	private String dataExample;		// 接口示例
-	private String dataReturndes;		// 返回结果报文
-	private String isCurrent;		// 是否当前版本
+	private String dataReturndes;		// 返回结果
+	private String isCurrent;		// 当前版本
 	private String retDataType;		// 返回数据类型
 	private String className;		// 类名
 	private String imitateData;		// 模拟报文
@@ -34,8 +34,8 @@ public class ServiceVersion extends DataEntity<ServiceVersion> {
 		super();
 	}
 
-	public ServiceVersion(String id){
-		super(id);
+	public ServiceVersion(String serviceCode){
+		this.serviceCode=serviceCode;
 	}
 
 
@@ -99,7 +99,7 @@ public class ServiceVersion extends DataEntity<ServiceVersion> {
 		this.dataReturndes = dataReturndes;
 	}
 	
-	@Length(min=0, max=2, message="是否当前版本长度必须介于 0 和 2 之间")
+	@Length(min=0, max=2, message="当前版本长度必须介于 0 和 2 之间")
 	public String getIsCurrent() {
 		return isCurrent;
 	}

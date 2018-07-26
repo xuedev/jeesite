@@ -10,7 +10,7 @@ import com.api.service.entity.info.ServiceVersion;
 /**
  * 服务基本信息DAO接口
  * @author 薛刚希
- * @version 2018-07-24
+ * @version 2018-07-26
  */
 @MyBatisDao
 public interface ServiceVersionDao extends CrudDao<ServiceVersion> {

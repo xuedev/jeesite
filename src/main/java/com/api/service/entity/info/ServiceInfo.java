@@ -12,15 +12,17 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 服务基本信息Entity
  * @author 薛刚希
- * @version 2018-07-24
+ * @version 2018-07-26
  */
 public class ServiceInfo extends DataEntity<ServiceInfo> {
 	
 	private static final long serialVersionUID = 1L;
 	private String serviceCode;		// 服务代码
 	private String serviceName;		// 服务名称
+	private String serviceCenterUrl;		// 服务中心
+	private String serviceGroup;		// 服务组
 	private String isNeedLogin;		// 登录认证方式
-	private String isAllowCrossDomain;		// 是否允许跨域
+	private String isAllowCrossDomain;		// 允许跨域
 	private String serviceType;		// 服务类型
 	private String adapMode;		// 适配模式
 	private String commMode;		// 请求方式
@@ -55,6 +57,24 @@ public class ServiceInfo extends DataEntity<ServiceInfo> {
 		this.serviceName = serviceName;
 	}
 	
+	@Length(min=0, max=256, message="服务中心长度必须介于 0 和 256 之间")
+	public String getServiceCenterUrl() {
+		return serviceCenterUrl;
+	}
+
+	public void setServiceCenterUrl(String serviceCenterUrl) {
+		this.serviceCenterUrl = serviceCenterUrl;
+	}
+	
+	@Length(min=0, max=256, message="服务组长度必须介于 0 和 256 之间")
+	public String getServiceGroup() {
+		return serviceGroup;
+	}
+
+	public void setServiceGroup(String serviceGroup) {
+		this.serviceGroup = serviceGroup;
+	}
+	
 	@Length(min=0, max=2, message="登录认证方式长度必须介于 0 和 2 之间")
 	public String getIsNeedLogin() {
 		return isNeedLogin;
@@ -64,7 +84,7 @@ public class ServiceInfo extends DataEntity<ServiceInfo> {
 		this.isNeedLogin = isNeedLogin;
 	}
 	
-	@Length(min=0, max=2, message="是否允许跨域长度必须介于 0 和 2 之间")
+	@Length(min=0, max=2, message="允许跨域长度必须介于 0 和 2 之间")
 	public String getIsAllowCrossDomain() {
 		return isAllowCrossDomain;
 	}
