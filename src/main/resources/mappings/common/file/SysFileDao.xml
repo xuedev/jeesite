@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.file.dao.SysFileDao">
+    
+	<sql id="sysFileColumns">
+		a.id AS "id",
+		a.fileid AS "fileid",
+		a.url AS "url",
+		a.type AS "type",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="sysFileJoins">
+	</sql>
+    
+	<select id="get" resultType="SysFile">
+		SELECT 
+			<include refid="sysFileColumns"/>
+		FROM sys_file a
+		<include refid="sysFileJoins"/>
+		WHERE a.id = #{id}
+	</select>
+
+
+	<select id="getFile" resultType="SysFile">
+		SELECT
+		<include refid="sysFileColumns"/>
+		FROM sys_file a
+		<include refid="sysFileJoins"/>
+		WHERE a.fileid = #{id}
+	</select>
+
+	<select id="findList" resultType="SysFile">
+		SELECT 
+			<include refid="sysFileColumns"/>
+		FROM sys_file a
+		<include refid="sysFileJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="fileid != null and fileid != ''">
+				AND a.fileid = #{fileid}
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				AND a.update_by = #{updateBy.id}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="SysFile">
+		SELECT 
+			<include refid="sysFileColumns"/>
+		FROM sys_file a
+		<include refid="sysFileJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+
+		INSERT INTO sys_file(
+			id,
+			fileid,
+			url,
+			type,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{fileid},
+			#{url},
+			#{type},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_file SET 	
+			url = #{url},
+			type = #{type},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			del_flag = #{delFlag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sys_file SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

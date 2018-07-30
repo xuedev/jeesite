@@ -45,6 +45,7 @@
 		<package name="com.management.modules"/>
 		<package name="com.service"/>
 		<package name="com.api"/>
+		<package name="com.common.file"/>
 	</typeAliases>
 	
 	<!-- 插件配置 -->
