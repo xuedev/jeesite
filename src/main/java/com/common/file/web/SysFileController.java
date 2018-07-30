@@ -35,7 +35,7 @@ import java.util.UUID;
 @Controller
 @RequestMapping(value = "/fileupload")
 public class SysFileController extends BaseController {
-
+    public static final int fileType = 0;
     public static final int imageType = 1;
     public static final int videoType = 2;
     public static final int audioType = 3;
@@ -47,7 +47,7 @@ public class SysFileController extends BaseController {
     @ResponseBody
     public Object saveFile(@RequestParam(required = false) MultipartFile file, HttpServletRequest request) {
 
-        return new BaseResult(0, "上传失败");
+        return save(file, fileType);
     }
 
     @RequestMapping(value = "saveImage",method = RequestMethod.POST)
