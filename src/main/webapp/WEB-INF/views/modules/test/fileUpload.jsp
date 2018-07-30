@@ -32,16 +32,14 @@
 <div class="layui-form-item">
     <label class="layui-form-label">图片</label>
     <div class="layui-input-inline">
-        <img class="upload-img"  id="demo1" name="demo1" onclick="imagePre()">
+        <img class="upload-img" id="demo1" name="demo1" onclick="imagePre()">
     </div>
 </div>
 
 
-    <button id="picker">
-        选择图片
-    </button>
-
-<input id="image" type="text" class="layui-hide" name="imagelist[0].url" readonly="true">
+<button id="picker">
+    选择图片
+</button>
 
 <script>
     //实例化
@@ -86,11 +84,9 @@
 
     });
     //上传成功
-    uploader.on('uploadSuccess', function (file,response) {
-        alert('s');
+    uploader.on('uploadSuccess', function (file, response) {
         $("#demo1").removeAttr("src");
-        $('#demo1').attr('src',response.data.url); //图片链接（base64）
-        alert(response.data.url);
+        $('#demo1').attr('src', response.data.url); //图片链接（base64）
     });
     //上传失败
     uploader.on('uploadError', function (file) {
@@ -98,7 +94,7 @@
     });
     //上传完成
     uploader.on('uploadComplete', function (file) {
-        alert("上传完成");
+        alert("完成");
     });
 </script>
 </body>
