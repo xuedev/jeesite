@@ -195,5 +195,8 @@ public class Global {
 		}
 		return projectPath;
 	}
+	public static String getUploadFilePath() {
+		return getUserfilesBaseDir()+USERFILES_BASE_URL;
+	}
 
 }
