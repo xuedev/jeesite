@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.sql.dao.group.QueryGroupDao">
+    
+	<sql id="queryGroupColumns">
+		a.id AS "id",
+		a.querygroupid AS "querygroupid",
+		a.querygroupdes AS "querygroupdes",
+		a.showtype AS "showtype",
+		a.showcount AS "showcount",
+		a.cachetype AS "cachetype",
+		a.cachetime AS "cachetime",
+		a.cachekey AS "cachekey",
+		a.interceptor AS "interceptor",
+		a.queryreference AS "queryreference",
+		a.procode AS "procode",
+		a.appcode AS "appcode",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.ispubliccall AS "ispubliccall"
+	</sql>
+	
+	<sql id="queryGroupJoins">
+	</sql>
+    
+	<select id="get" resultType="QueryGroup">
+		SELECT 
+			<include refid="queryGroupColumns"/>
+		FROM ax_query_group a
+		<include refid="queryGroupJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="QueryGroup">
+		SELECT 
+			<include refid="queryGroupColumns"/>
+		FROM ax_query_group a
+		<include refid="queryGroupJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="querygroupid != null and querygroupid != ''">
+				AND a.querygroupid = #{querygroupid}
+			</if>
+			<if test="querygroupdes != null and querygroupdes != ''">
+				AND a.querygroupdes = #{querygroupdes}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="QueryGroup">
+		SELECT 
+			<include refid="queryGroupColumns"/>
+		FROM ax_query_group a
+		<include refid="queryGroupJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ax_query_group(
+			id,
+			querygroupid,
+			querygroupdes,
+			showtype,
+			showcount,
+			cachetype,
+			cachetime,
+			cachekey,
+			queryreference,
+			procode,
+			appcode,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			ispubliccall
+		) VALUES (
+			#{id},
+			#{querygroupid},
+			#{querygroupdes},
+			#{showtype},
+			#{showcount},
+			#{cachetype},
+			#{cachetime},
+			#{cachekey},
+			#{queryreference},
+			#{procode},
+			#{appcode},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{ispubliccall}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ax_query_group SET 	
+			querygroupid = #{querygroupid},
+			querygroupdes = #{querygroupdes},
+			showtype = #{showtype},
+			showcount = #{showcount},
+			cachetype = #{cachetype},
+			cachetime = #{cachetime},
+			cachekey = #{cachekey},
+			interceptor = #{interceptor},
+			queryreference = #{queryreference},
+			procode = #{procode},
+			appcode = #{appcode},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			ispubliccall = #{ispubliccall}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE ax_query_group SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
