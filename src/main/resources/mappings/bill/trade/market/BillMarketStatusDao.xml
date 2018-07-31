@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bill.trade.dao.market.BillMarketStatusDao">
+<mapper namespace="com.linking.bill.trade.dao.market.BillMarketStatusDao">
     
 	<sql id="billMarketStatusColumns">
 		a.id AS "id",
