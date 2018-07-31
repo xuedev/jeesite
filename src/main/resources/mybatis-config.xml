@@ -46,6 +46,7 @@
 		<package name="com.service"/>
 		<package name="com.api"/>
 		<package name="com.common.file"/>
+		<package name="com.bill"/>
 	</typeAliases>
 	
 	<!-- 插件配置 -->
