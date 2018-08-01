@@ -86,7 +86,7 @@
     //上传成功
     uploader.on('uploadSuccess', function (file, response) {
         $("#demo1").removeAttr("src");
-        $('#demo1').attr('src', response.data.url); //图片链接（base64）
+        $('#demo1').attr('src','${pageContext.request.contextPath}'+response.data.url); //图片链接（base64）
     });
     //上传失败
     uploader.on('uploadError', function (file) {
