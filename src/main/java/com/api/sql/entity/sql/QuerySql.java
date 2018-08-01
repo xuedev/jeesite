@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * SQL查询分组sqlEntity
  * @author hs
- * @version 2018-07-30
+ * @version 2018-08-01
  */
 public class QuerySql extends DataEntity<QuerySql> {
 	

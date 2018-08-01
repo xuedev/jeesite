@@ -25,7 +25,7 @@ import com.api.sql.service.sql.QuerySqlService;
 /**
  * SQL查询分组sqlController
  * @author hs
- * @version 2018-07-30
+ * @version 2018-08-01
  */
 @Controller
 @RequestMapping(value = "${adminPath}/sql/sql/querySql")

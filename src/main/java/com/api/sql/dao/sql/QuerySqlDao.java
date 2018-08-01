@@ -10,7 +10,7 @@ import com.api.sql.entity.sql.QuerySql;
 /**
  * SQL查询分组sqlDAO接口
  * @author hs
- * @version 2018-07-30
+ * @version 2018-08-01
  */
 @MyBatisDao
 public interface QuerySqlDao extends CrudDao<QuerySql> {

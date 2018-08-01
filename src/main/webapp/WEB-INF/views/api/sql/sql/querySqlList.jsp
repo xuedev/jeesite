@@ -39,7 +39,7 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>查询ID</th>
+				<th>查询sqlID</th>
 				<th>查询分组ID</th>
 				<th>查询序号</th>
 				<th>查询SQL数据类</th>
@@ -61,7 +61,7 @@
 		<c:forEach items="${page.list}" var="querySql">
 			<tr>
 				<td><a href="${ctx}/sql/sql/querySql/form?id=${querySql.id}">
-					${querySql.id}
+					${querySql.querysqlid}
 				</a></td>
 				<td>
 					${querySql.querygroupid}
