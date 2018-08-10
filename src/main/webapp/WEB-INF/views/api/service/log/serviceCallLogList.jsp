@@ -114,7 +114,7 @@
 					<fmt:formatDate value="${serviceCallLog.responseTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
-					${serviceCallLog.handleTime}
+					${serviceCallLog.handleTime}ms
 				</td>
 				<shiro:hasPermission name="service:log:serviceCallLog:edit"><td>
     				<a href="${ctx}/service/log/serviceCallLog/form?id=${serviceCallLog.id}">修改</a>
