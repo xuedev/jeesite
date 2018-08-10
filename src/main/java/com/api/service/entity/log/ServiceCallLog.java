@@ -32,13 +32,13 @@ public class ServiceCallLog extends DataEntity<ServiceCallLog> {
 	private String responseData;		// 返回报文
 	private Date requestTime;		// 请求时间
 	private Date responseTime;		// 返回时间
-	private String handleTime;		// 处理时间
+	private Long handleTime;		// 处理时间
 	private Date beginRequestTime;		// 开始 请求时间
 	private Date endRequestTime;		// 结束 请求时间
 	private Date beginResponseTime;		// 开始 返回时间
 	private Date endResponseTime;		// 结束 返回时间
-	private String beginHandleTime;		// 开始 处理时间
-	private String endHandleTime;		// 结束 处理时间
+	private Long beginHandleTime;		// 开始 处理时间
+	private Long endHandleTime;		// 结束 处理时间
 	
 	public ServiceCallLog() {
 		super();
@@ -173,12 +173,12 @@ public class ServiceCallLog extends DataEntity<ServiceCallLog> {
 		this.responseTime = responseTime;
 	}
 	
-	@Length(min=1, max=24, message="处理时间长度必须介于 1 和 24 之间")
-	public String getHandleTime() {
+	@NotNull(message="处理时间不能为空")
+	public Long getHandleTime() {
 		return handleTime;
 	}
 
-	public void setHandleTime(String handleTime) {
+	public void setHandleTime(Long handleTime) {
 		this.handleTime = handleTime;
 	}
 	
@@ -214,19 +214,19 @@ public class ServiceCallLog extends DataEntity<ServiceCallLog> {
 		this.endResponseTime = endResponseTime;
 	}
 		
-	public String getBeginHandleTime() {
+	public Long getBeginHandleTime() {
 		return beginHandleTime;
 	}
 
-	public void setBeginHandleTime(String beginHandleTime) {
+	public void setBeginHandleTime(Long beginHandleTime) {
 		this.beginHandleTime = beginHandleTime;
 	}
 	
-	public String getEndHandleTime() {
+	public Long getEndHandleTime() {
 		return endHandleTime;
 	}
 
-	public void setEndHandleTime(String endHandleTime) {
+	public void setEndHandleTime(Long endHandleTime) {
 		this.endHandleTime = endHandleTime;
 	}
 		
