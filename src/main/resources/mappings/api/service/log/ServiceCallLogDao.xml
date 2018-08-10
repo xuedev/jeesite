@@ -51,9 +51,6 @@
 					<if test="dbName == 'mssql'">'%'+#{serviceName}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{serviceName},'%')</if>
 			</if>
-			<if test="serviceType != null and serviceType != ''">
-				AND a.service_type = #{serviceType}
-			</if>
 			<if test="beginRequestTime != null and endRequestTime != null and beginRequestTime != '' and endRequestTime != ''">
 				AND a.request_time BETWEEN #{beginRequestTime} AND #{endRequestTime}
 			</if>

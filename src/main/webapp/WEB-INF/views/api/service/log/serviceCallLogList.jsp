@@ -31,12 +31,6 @@
 			<li><label>服务名称：</label>
 				<form:input path="serviceName" htmlEscape="false" maxlength="256" class="input-medium"/>
 			</li>
-			<li><label>服务类型：</label>
-				<form:select path="serviceType" class="input-medium">
-					<form:option value="" label=""/>
-					<form:options items="${fns:getDictList('service_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
-			</li>
 			<li><label>请求时间：</label>
 				<input name="beginRequestTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
 					value="<fmt:formatDate value="${serviceCallLog.beginRequestTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
@@ -62,14 +56,10 @@
 		<thead>
 			<tr>
 				<th>服务代码</th>
-				<th>服务名称</th>
-				<th>服务渠道</th>
 				<th>服务中心地址</th>
 				<th>服务组</th>
 				<th>服务类名</th>
 				<th>版本号</th>
-				<th>服务类型</th>
-				<th>查询分组ID</th>
 				<th>请求报文</th>
 				<th>返回报文</th>
 				<th>请求时间</th>
@@ -85,12 +75,6 @@
 					${serviceCallLog.serviceCode}
 				</a></td>
 				<td>
-					${serviceCallLog.serviceName}
-				</td>
-				<td>
-					${fns:getDictLabel(serviceCallLog.channel, 'service_channel', '')}
-				</td>
-				<td>
 					${serviceCallLog.serviceCenterUrl}
 				</td>
 				<td>
@@ -101,12 +85,6 @@
 				</td>
 				<td>
 					${serviceCallLog.version}
-				</td>
-				<td>
-					${fns:getDictLabel(serviceCallLog.serviceType, 'service_type', '')}
-				</td>
-				<td>
-					${serviceCallLog.queryGroupid}
 				</td>
 				<td>
 					${serviceCallLog.requestData}
