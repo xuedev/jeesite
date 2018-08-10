@@ -56,8 +56,11 @@
 					value="<fmt:formatDate value="${serviceCallLog.endResponseTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</li>
-			<li><label>处理时间：</label>
-				<form:input path="handleTime" htmlEscape="false" maxlength="24" class="input-medium"/>
+			<li><label>最小用时：</label>
+				<form:input path="beginHandleTime" htmlEscape="false" maxlength="24" class="input-medium"/>
+			</li>
+			<li><label>最大用时：</label>
+				<form:input path="endHandleTime" htmlEscape="false" maxlength="24" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
