@@ -58,7 +58,7 @@
 			</li>
 			<li><label>处理时间：</label>
 				<form:input path="beginHandleTime" htmlEscape="false" maxlength="11" class="input-medium"/>-
-				<form:input path="beginHandleTime" htmlEscape="false" maxlength="11" class="input-medium"/>
+				<form:input path="endHandleTime" htmlEscape="false" maxlength="11" class="input-medium"/>
 			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
