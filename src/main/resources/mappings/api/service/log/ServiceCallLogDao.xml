@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.service.dao.log.ServiceCallLogDao">
+    
+	<sql id="serviceCallLogColumns">
+		a.id AS "id",
+		a.service_code AS "serviceCode",
+		a.service_name AS "serviceName",
+		a.channel AS "channel",
+		a.service_center_url AS "serviceCenterUrl",
+		a.service_group AS "serviceGroup",
+		a.class_name AS "className",
+		a.version AS "version",
+		a.service_type AS "serviceType",
+		a.query_groupid AS "queryGroupid",
+		a.request_data AS "requestData",
+		a.response_data AS "responseData",
+		a.request_time AS "requestTime",
+		a.response_time AS "responseTime",
+		a.handle_time AS "handleTime",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="serviceCallLogJoins">
+	</sql>
+    
+	<select id="get" resultType="ServiceCallLog">
+		SELECT 
+			<include refid="serviceCallLogColumns"/>
+		FROM ax_service_call_log a
+		<include refid="serviceCallLogJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ServiceCallLog">
+		SELECT 
+			<include refid="serviceCallLogColumns"/>
+		FROM ax_service_call_log a
+		<include refid="serviceCallLogJoins"/>
+		<where>
+			
+			<if test="serviceCode != null and serviceCode != ''">
+				AND a.service_code = #{serviceCode}
+			</if>
+			<if test="serviceName != null and serviceName != ''">
+				AND a.service_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{serviceName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{serviceName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{serviceName},'%')</if>
+			</if>
+			<if test="serviceType != null and serviceType != ''">
+				AND a.service_type = #{serviceType}
+			</if>
+			<if test="beginRequestTime != null and endRequestTime != null and beginRequestTime != '' and endRequestTime != ''">
+				AND a.request_time BETWEEN #{beginRequestTime} AND #{endRequestTime}
+			</if>
+			<if test="beginResponseTime != null and endResponseTime != null and beginResponseTime != '' and endResponseTime != ''">
+				AND a.response_time BETWEEN #{beginResponseTime} AND #{endResponseTime}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ServiceCallLog">
+		SELECT 
+			<include refid="serviceCallLogColumns"/>
+		FROM ax_service_call_log a
+		<include refid="serviceCallLogJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ax_service_call_log(
+			id,
+			service_code,
+			service_name,
+			channel,
+			service_center_url,
+			service_group,
+			class_name,
+			version,
+			service_type,
+			query_groupid,
+			request_data,
+			response_data,
+			request_time,
+			response_time,
+			handle_time,
+			create_by,
+			create_date,
+			update_by,
+			update_date
+		) VALUES (
+			#{id},
+			#{serviceCode},
+			#{serviceName},
+			#{channel},
+			#{serviceCenterUrl},
+			#{serviceGroup},
+			#{className},
+			#{version},
+			#{serviceType},
+			#{queryGroupid},
+			#{requestData},
+			#{responseData},
+			#{requestTime},
+			#{responseTime},
+			#{handleTime},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ax_service_call_log SET 	
+			service_code = #{serviceCode},
+			service_name = #{serviceName},
+			channel = #{channel},
+			service_center_url = #{serviceCenterUrl},
+			service_group = #{serviceGroup},
+			class_name = #{className},
+			version = #{version},
+			service_type = #{serviceType},
+			query_groupid = #{queryGroupid},
+			request_data = #{requestData},
+			response_data = #{responseData},
+			request_time = #{requestTime},
+			response_time = #{responseTime},
+			handle_time = #{handleTime},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM ax_service_call_log
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
