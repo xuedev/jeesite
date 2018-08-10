@@ -9,6 +9,7 @@ CREATE TABLE `ax_service_call_log` (
   `version` varchar(8) NOT NULL COMMENT '版本号',
   `service_type` varchar(2) DEFAULT NULL COMMENT '服务类型',
   `query_groupId` varchar(32) DEFAULT NULL COMMENT '查询分组ID',
+	`request_ip` text COMMENT '请求IP',
   `request_data` text COMMENT '请求报文',
   `response_data` text COMMENT '返回报文',
   `request_time` datetime NOT NULL COMMENT '请求时间',
@@ -20,3 +21,4 @@ CREATE TABLE `ax_service_call_log` (
   `update_date` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务调用日志表';
+
