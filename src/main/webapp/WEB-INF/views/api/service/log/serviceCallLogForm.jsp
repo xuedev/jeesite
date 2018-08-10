@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">服务中心地址：</label>
+			<label class="control-label">服务中心：</label>
 			<div class="controls">
 				<form:input path="serviceCenterUrl" htmlEscape="false" maxlength="256" class="input-xlarge "/>
 			</div>
@@ -97,15 +97,21 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">请求IP：</label>
+			<div class="controls">
+				<form:input path="requestIp" htmlEscape="false" class="input-xlarge "/>
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">请求报文：</label>
 			<div class="controls">
-				<form:textarea path="requestData" htmlEscape="false" rows="4" class="input-xxlarge "/>
+				<form:input path="requestData" htmlEscape="false" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">返回报文：</label>
 			<div class="controls">
-				<form:textarea path="responseData" htmlEscape="false" rows="4" class="input-xxlarge "/>
+				<form:input path="responseData" htmlEscape="false" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="control-group">

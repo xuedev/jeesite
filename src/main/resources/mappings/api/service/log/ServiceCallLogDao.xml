@@ -13,6 +13,7 @@
 		a.version AS "version",
 		a.service_type AS "serviceType",
 		a.query_groupid AS "queryGroupid",
+		a.request_ip AS "requestIp",
 		a.request_data AS "requestData",
 		a.response_data AS "responseData",
 		a.request_time AS "requestTime",
@@ -43,7 +44,10 @@
 		<where>
 			
 			<if test="serviceCode != null and serviceCode != ''">
-				AND a.service_code = #{serviceCode}
+				AND a.service_code LIKE 
+					<if test="dbName == 'oracle'">'%'||#{serviceCode}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{serviceCode}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{serviceCode},'%')</if>
 			</if>
 			<if test="serviceName != null and serviceName != ''">
 				AND a.service_name LIKE 
@@ -51,11 +55,32 @@
 					<if test="dbName == 'mssql'">'%'+#{serviceName}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{serviceName},'%')</if>
 			</if>
+			<if test="serviceCenterUrl != null and serviceCenterUrl != ''">
+				AND a.service_center_url LIKE 
+					<if test="dbName == 'oracle'">'%'||#{serviceCenterUrl}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{serviceCenterUrl}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{serviceCenterUrl},'%')</if>
+			</if>
+			<if test="className != null and className != ''">
+				AND a.class_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{className}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{className}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{className},'%')</if>
+			</if>
+			<if test="requestIp != null and requestIp != ''">
+				AND a.request_ip LIKE 
+					<if test="dbName == 'oracle'">'%'||#{requestIp}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{requestIp}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{requestIp},'%')</if>
+			</if>
 			<if test="beginRequestTime != null and endRequestTime != null and beginRequestTime != '' and endRequestTime != ''">
 				AND a.request_time BETWEEN #{beginRequestTime} AND #{endRequestTime}
 			</if>
 			<if test="beginResponseTime != null and endResponseTime != null and beginResponseTime != '' and endResponseTime != ''">
 				AND a.response_time BETWEEN #{beginResponseTime} AND #{endResponseTime}
+			</if>
+			<if test="beginHandleTime != null and endHandleTime != null and beginHandleTime != '' and endHandleTime != ''">
+				AND a.handle_time BETWEEN #{beginHandleTime} AND #{endHandleTime}
 			</if>
 		</where>
 		<choose>
@@ -98,6 +123,7 @@
 			version,
 			service_type,
 			query_groupid,
+			request_ip,
 			request_data,
 			response_data,
 			request_time,
@@ -118,6 +144,7 @@
 			#{version},
 			#{serviceType},
 			#{queryGroupid},
+			#{requestIp},
 			#{requestData},
 			#{responseData},
 			#{requestTime},
@@ -141,6 +168,7 @@
 			version = #{version},
 			service_type = #{serviceType},
 			query_groupid = #{queryGroupid},
+			request_ip = #{requestIp},
 			request_data = #{requestData},
 			response_data = #{responseData},
 			request_time = #{requestTime},

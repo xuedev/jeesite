@@ -21,12 +21,13 @@ public class ServiceCallLog extends DataEntity<ServiceCallLog> {
 	private String serviceCode;		// 服务代码
 	private String serviceName;		// 服务名称
 	private String channel;		// 服务渠道
-	private String serviceCenterUrl;		// 服务中心地址
+	private String serviceCenterUrl;		// 服务中心
 	private String serviceGroup;		// 服务组
 	private String className;		// 服务类名
 	private String version;		// 版本号
 	private String serviceType;		// 服务类型
 	private String queryGroupid;		// 查询分组ID
+	private String requestIp;		// 请求IP
 	private String requestData;		// 请求报文
 	private String responseData;		// 返回报文
 	private Date requestTime;		// 请求时间
@@ -36,6 +37,8 @@ public class ServiceCallLog extends DataEntity<ServiceCallLog> {
 	private Date endRequestTime;		// 结束 请求时间
 	private Date beginResponseTime;		// 开始 返回时间
 	private Date endResponseTime;		// 结束 返回时间
+	private String beginHandleTime;		// 开始 处理时间
+	private String endHandleTime;		// 结束 处理时间
 	
 	public ServiceCallLog() {
 		super();
@@ -72,7 +75,7 @@ public class ServiceCallLog extends DataEntity<ServiceCallLog> {
 		this.channel = channel;
 	}
 	
-	@Length(min=0, max=256, message="服务中心地址长度必须介于 0 和 256 之间")
+	@Length(min=0, max=256, message="服务中心长度必须介于 0 和 256 之间")
 	public String getServiceCenterUrl() {
 		return serviceCenterUrl;
 	}
@@ -124,6 +127,14 @@ public class ServiceCallLog extends DataEntity<ServiceCallLog> {
 
 	public void setQueryGroupid(String queryGroupid) {
 		this.queryGroupid = queryGroupid;
+	}
+	
+	public String getRequestIp() {
+		return requestIp;
+	}
+
+	public void setRequestIp(String requestIp) {
+		this.requestIp = requestIp;
 	}
 	
 	public String getRequestData() {
@@ -201,6 +212,22 @@ public class ServiceCallLog extends DataEntity<ServiceCallLog> {
 
 	public void setEndResponseTime(Date endResponseTime) {
 		this.endResponseTime = endResponseTime;
+	}
+		
+	public String getBeginHandleTime() {
+		return beginHandleTime;
+	}
+
+	public void setBeginHandleTime(String beginHandleTime) {
+		this.beginHandleTime = beginHandleTime;
+	}
+	
+	public String getEndHandleTime() {
+		return endHandleTime;
+	}
+
+	public void setEndHandleTime(String endHandleTime) {
+		this.endHandleTime = endHandleTime;
 	}
 		
 }

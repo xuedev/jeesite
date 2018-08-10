@@ -31,6 +31,15 @@
 			<li><label>服务名称：</label>
 				<form:input path="serviceName" htmlEscape="false" maxlength="256" class="input-medium"/>
 			</li>
+			<li><label>服务中心：</label>
+				<form:input path="serviceCenterUrl" htmlEscape="false" maxlength="256" class="input-medium"/>
+			</li>
+			<li><label>服务类名：</label>
+				<form:input path="className" htmlEscape="false" maxlength="512" class="input-medium"/>
+			</li>
+			<li><label>请求IP：</label>
+				<form:input path="requestIp" htmlEscape="false" class="input-medium"/>
+			</li>
 			<li><label>请求时间：</label>
 				<input name="beginRequestTime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
 					value="<fmt:formatDate value="${serviceCallLog.beginRequestTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
@@ -47,6 +56,9 @@
 					value="<fmt:formatDate value="${serviceCallLog.endResponseTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 			</li>
+			<li><label>处理时间：</label>
+				<form:input path="handleTime" htmlEscape="false" maxlength="24" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -56,12 +68,12 @@
 		<thead>
 			<tr>
 				<th>服务代码</th>
-				<th>服务中心地址</th>
+				<th>服务名称</th>
+				<th>服务中心</th>
 				<th>服务组</th>
 				<th>服务类名</th>
 				<th>版本号</th>
-				<th>请求报文</th>
-				<th>返回报文</th>
+				<th>请求IP</th>
 				<th>请求时间</th>
 				<th>返回时间</th>
 				<th>处理时间</th>
@@ -75,6 +87,9 @@
 					${serviceCallLog.serviceCode}
 				</a></td>
 				<td>
+					${serviceCallLog.serviceName}
+				</td>
+				<td>
 					${serviceCallLog.serviceCenterUrl}
 				</td>
 				<td>
@@ -87,10 +102,7 @@
 					${serviceCallLog.version}
 				</td>
 				<td>
-					${serviceCallLog.requestData}
-				</td>
-				<td>
-					${serviceCallLog.responseData}
+					${serviceCallLog.requestIp}
 				</td>
 				<td>
 					<fmt:formatDate value="${serviceCallLog.requestTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
